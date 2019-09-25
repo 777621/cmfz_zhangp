@@ -1,0 +1,24 @@
+server:
+  port: 8989
+  servlet:
+    context-path: /cmfz_zhangp
+    jsp:
+      init-parameters:
+        development: true
+spring:
+  mvc:
+    view:
+      prefix: /
+      suffix: .jsp
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cfmz
+    username: root
+    password: root
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 100MB
+mybatis:
+  type-aliases-package: com.baizhi.entity
+  mapper-locations: classpath:/com/baizhi/dao/*Mapper.xml

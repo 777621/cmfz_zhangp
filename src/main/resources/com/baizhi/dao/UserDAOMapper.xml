@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.UserDAO">
+    <select id="findAll" resultType="User">
+        select * from user
+        limit ${(page-1)*rows},#{rows}
+    </select>
+    <select id="totalcounts" resultType="int">
+        select count(*) from user
+    </select>
+    <update id="update">
+        update user
+        <set>
+            <if test="status!=null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <select id="showAll" resultType="User">
+        select * from user
+    </select>
+</mapper>

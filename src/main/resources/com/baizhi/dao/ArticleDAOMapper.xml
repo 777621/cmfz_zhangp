@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ArticleDAO">
+    <select id="findAll" resultType="Article">
+        select * from article
+        limit ${(page-1)*rows},#{rows}
+    </select>
+    <select id="totalcounts" resultType="int">
+        select count(*) from article
+    </select>
+    <delete id="delete">
+        delete from article where id = #{id}
+    </delete>
+    <insert id="save">
+        insert into article values (#{id},#{title},#{author},#{content},#{create_date},#{status},#{t_id})
+    </insert>
+    <update id="update">
+        update article
+        <set>
+            <if test="title!=null">
+                title = #{title},
+            </if>
+            <if test="author!=null">
+                author = #{author},
+            </if>
+            <if test="content!=null">
+                content = #{content},
+            </if>
+            <if test="status!=null">
+                status = #{status}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

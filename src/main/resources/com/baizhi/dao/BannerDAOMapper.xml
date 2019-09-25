@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "../mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.BannerDAO">
+    <!--分页查询所有-->
+
+    <select id="findAll" resultType="Banner">
+        select * from d_banner
+        limit ${(page-1)*rows},#{rows}
+    </select>
+
+    <!--查询总条数-->
+
+    <select id="totalcounts" resultType="int">
+        select count(*) from d_banner
+    </select>
+
+    <!--添加轮播图-->
+    <insert id="add">
+        insert into d_banner values (#{id},#{name},#{img_path},#{status},#{description},#{up_date})
+    </insert>
+    <!--删除轮播图-->
+    <delete id="delete">
+        delete from d_banner where id = #{id}
+    </delete>
+    <!--修改轮播图-->
+    <update id="updateStatus">
+        update d_banner
+        <set>
+            <if test="name!=null">
+                name=#{name},
+            </if>
+            <if test="img_path!=null">
+                img_path=#{img_path},
+            </if>
+            <if test="status!=null">
+                status=#{status},
+            </if>
+            <if test="description!=null">
+                description=#{description}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
